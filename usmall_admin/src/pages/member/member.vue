@@ -22,11 +22,11 @@ return {
 }
 },
 methods:{
-  edit(id){
+  edit(uid){
     this.info.show=true
-    this.info.title='管理员修改'
+    this.info.title='会员修改'
     this.info.isAdd=false
-    this.$refs.add.getDetail(id)
+    this.$refs.add.getDetail(uid)
   }
 },
 mounted(){},

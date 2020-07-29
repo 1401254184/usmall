@@ -62,6 +62,9 @@ export default {
     //取消
     cancel() {
       this.info.show = false;
+      if (!this.info.isAdd) {
+        this.empty();
+      }
     },
     // 重置
     empty() {
@@ -74,6 +77,12 @@ export default {
     },
     // 添加
     add() {
+        for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
       this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
       requestRoleAdd(this.form).then((res) => {
         if (res.data.code == 200) {
@@ -96,6 +105,12 @@ export default {
      },
 //修改
     change(){
+        for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
        this.form.menus = JSON.stringify(this.$refs.tree.getCheckedKeys());
       requestRoleUpdate(this.form).then((res)=>{
         if(res.data.code==200){

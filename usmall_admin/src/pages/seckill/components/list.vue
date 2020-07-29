@@ -1,30 +1,15 @@
-
-
 <template>
   <div>
    
  <el-table
     :data="list"
     style="width: 100%;margin-bottom: 20px;"
-    row-key="id"
-    border
-    default-expand-all
-    :tree-props="{children: 'children'}">
+    border>
     <el-table-column
-      prop="pid"
-      label="分类编号"
+      prop="title"
+      label="活动名称"
       width="180">
     </el-table-column>
-    <el-table-column
-      prop="catename"
-      label="分类名称"
-      width="180">
-    </el-table-column>
-     <el-table-column label="图片">
-        <template slot-scope="scope">
-          <img :src="$imgPre+scope.row.img" alt />
-        </template>
-      </el-table-column>
     <el-table-column
       prop="address"
       label="状态">
@@ -47,12 +32,12 @@
 </template>
 <script>
 import {mapActions,mapGetters} from 'vuex'
-import { requestCateDelete } from "../../../util/request";
+import { requestSeckillDelete } from "../../../util/request";
 import { successAlert,warningAlert } from "../../../util/alert";
 export default {
   computed:{
     ...mapGetters({
-      list:'cate/list'
+      list:'seckill/list'
     })
   },
   
@@ -62,13 +47,13 @@ export default {
   },
   methods: {
    ...mapActions({
-     requestList:'cate/requestList'
+     requestList:'seckill/requestList'
    }),
    edit(id){
      this.$emit('edit',id)
    },
     del(id) {
-          requestCateDelete({ id: id }).then(res=>{
+          requestSeckillDelete({ id: id }).then(res=>{
             if(res.data.code==200){
               successAlert(res.data.msg);
               this.requestList()
@@ -84,8 +69,4 @@ export default {
 };
 </script>
 <style scoped>
-img{
-    width: 80px;
-    height: 80px;
-}
 </style>

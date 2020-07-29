@@ -111,19 +111,24 @@ export default {
       };
     },
     //添加数据
-    add() {
+    add() {  
+      
+         
       menuAdd(this.form).then((res) => {
         if (res.data.code == 200) {
+
           successAlert(res.data.msg);
           //重置form数据
           this.empty();
           //弹框消失
           this.cancel();
           //再次请求list数据
-          this.requestList();
-        } else {
+          this.requestList();}
+         else {
           warningAlert(res.data.msg);
         }
+
+
       });
     },
 // 获取某一条数据

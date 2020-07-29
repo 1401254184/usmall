@@ -2,16 +2,8 @@
   <div>
     <el-dialog :title="info.title" :visible.sync="info.show">
       <el-form :model="form" class="add">
-        <el-form-item label="上级分类" :label-width="formLabelWidth">
-          <el-select v-model="form.pid">
-            <el-option label="--请选择--" value disabled></el-option>
-            <el-option label="顶级分类" :value="0"></el-option>
-             <!-- 动态数据 -->
-            <el-option v-for="item in list" :key="item.id" :label="item.catename" :value="item.id"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="分类名称" :label-width="formLabelWidth">
-          <el-input v-model="form.catename" autocomplete="off"></el-input>
+        <el-form-item label="标题" :label-width="formLabelWidth">
+          <el-input v-model="form.title" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="图片" :label-width="formLabelWidth" v-if="form.pid!=0">
           <el-upload
@@ -44,9 +36,9 @@
 </template>
 <script>
 import {
-  requestCateAdd,
-  requestCateDetail,
-  requestCateUpdate,
+  requestBannerAdd,
+  requestBannerDetail,
+  requestBannerUpdate,
 } from "../../../util/request";
 import { successAlert, warningAlert } from "../../../util/alert";
 import { mapGetters, mapActions } from "vuex";
@@ -55,15 +47,14 @@ export default {
   components: {},
   computed: {
     ...mapGetters({
-      list: "cate/list",
+      list: "banner/list",
     }),
   },
   data() {
     return {
       imageUrl: "",
       form: {
-        pid: 0,
-        catename: "",
+        title: "",
         img: null,
         status: 1,
       },
@@ -72,7 +63,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      requestList: "cate/requestList",
+      requestList: "banner/requestList",
     }),
     cancel() {
       this.info.show = false;
@@ -84,8 +75,7 @@ export default {
     empty() {
       this.imageUrl = "";
       this.form = {
-        pid: 0,
-        catename: "",
+        title: "",
         img: null,
         status: 1,
       };
@@ -109,13 +99,14 @@ export default {
     },
     //添加数据
     add() {
+
         for(var i in this.form){
           if(!this.form[i]){
             warningAlert('数据不能为空')
             return;
           }
         }
-      requestCateAdd(this.form).then((res) => {
+      requestBannerAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
           //重置form数据
@@ -131,20 +122,22 @@ export default {
     },
     // 获取某一条数据
     getDetail(id) {
-      requestCateDetail({ id: id }).then((res) => {
-        this.form = res.data.list;
-        this.form.id = id;
+      requestBannerDetail({ id: id }).then((res) => {
+         this.form = res.data.list;
+         this.form.id = id;
          this.imageUrl = this.$imgPre + res.data.list.img;
       });
     },
     update() {
-        for(var i in this.form){
+
+  for(var i in this.form){
           if(!this.form[i]){
             warningAlert('数据不能为空')
             return;
           }
         }
-      requestCateUpdate(this.form).then((res) => {
+
+      requestBannerUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
           this.empty();

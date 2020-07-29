@@ -77,6 +77,9 @@ export default {
     //取消
     cancel() {
       this.info.show = false;
+      if (!this.info.isAdd) {
+        this.empty();
+      }
     },
 
     //重置
@@ -94,6 +97,12 @@ export default {
     },
     // 添加
     add() {
+        for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
       if (this.attrArr.some((item) => item.value == "")) {
         warningAlert("属性规格均不能为空");
         return;
@@ -123,6 +132,12 @@ export default {
     },
     // 修改
     update() {
+        for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
         if (this.attrArr.some((item) => item.value == "")) {
         warningAlert("属性规格均不能为空");
         return;

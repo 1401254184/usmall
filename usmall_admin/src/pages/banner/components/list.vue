@@ -1,23 +1,14 @@
-
-
 <template>
   <div>
-   
- <el-table
-    :data="list"
-    style="width: 100%;margin-bottom: 20px;"
-    row-key="id"
-    border
-    default-expand-all
-    :tree-props="{children: 'children'}">
+ <el-table :data="list" style="width: 100%;margin-bottom: 20px;" border>
     <el-table-column
-      prop="pid"
-      label="分类编号"
+      prop="id"
+      label="编号"
       width="180">
     </el-table-column>
     <el-table-column
-      prop="catename"
-      label="分类名称"
+      prop="title"
+      label="轮播图标题"
       width="180">
     </el-table-column>
      <el-table-column label="图片">
@@ -47,12 +38,12 @@
 </template>
 <script>
 import {mapActions,mapGetters} from 'vuex'
-import { requestCateDelete } from "../../../util/request";
+import { requestBannerDelete } from "../../../util/request";
 import { successAlert,warningAlert } from "../../../util/alert";
 export default {
   computed:{
     ...mapGetters({
-      list:'cate/list'
+      list:'banner/list'
     })
   },
   
@@ -62,13 +53,13 @@ export default {
   },
   methods: {
    ...mapActions({
-     requestList:'cate/requestList'
+     requestList:'banner/requestList'
    }),
    edit(id){
      this.$emit('edit',id)
    },
     del(id) {
-          requestCateDelete({ id: id }).then(res=>{
+          requestBannerDelete({ id: id }).then(res=>{
             if(res.data.code==200){
               successAlert(res.data.msg);
               this.requestList()

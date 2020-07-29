@@ -8,6 +8,10 @@ import role from './modules/role'
 import manage from './modules/manage'
 import cate from './modules/cate'
 import spec from './modules/spec'
+import member from './modules/member'
+import banner from './modules/banner'
+import goods from './modules/goods'
+import seckill from './modules/seckill'
 
 export default new Vuex.Store({
  state,
@@ -19,6 +23,10 @@ export default new Vuex.Store({
      role,
      manage,
      cate,
-     spec
+     spec,
+     member,
+     banner,
+     goods,
+     seckill
  }
 })

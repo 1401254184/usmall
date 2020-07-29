@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       form: {
-        roleid:1,
+        roleid:"",
         password: "",
         username: "",
         status: 1,
@@ -66,13 +66,16 @@ export default {
       }),
       //取消
     cancel(){
-      this.info.show=false
+      this.info.show=false;
+      if (!this.info.isAdd) {
+        this.empty();
+      }
     },
     
     //重置
     empty(){
        this.form={
-        roleid:1,
+        roleid:"",
         password: "",
         username: "",
         status: 1,
@@ -80,6 +83,12 @@ export default {
     },
     // 添加
   add(){
+      for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
            requestManageAdd(this.form).then(res=>{
              if(res.data.code==200){
            successAlert(res.data.msg);
@@ -101,6 +110,12 @@ export default {
   },
 // 修改
 update(){
+    for(var i in this.form){
+          if(!this.form[i]){
+            warningAlert('数据不能为空')
+            return;
+          }
+        }
   requestManageUpdate(this.form).then(res=>{
     if(res.data.code==200){
       successAlert(res.data.msg);

@@ -3,7 +3,7 @@
     <el-table :data="manageList" border style="width: 100%">
       <el-table-column prop="id" label="用户编号" width="180"></el-table-column>
       <el-table-column prop="username" label="用户名" width="180"></el-table-column>
-      <el-table-column prop="roleid" label="所属角色"></el-table-column>
+      <el-table-column prop="rolename" label="所属角色"></el-table-column>
       <el-table-column prop="address" label="状态">
         <template slot-scope="scope">
           <el-button type="primary" v-if="scope.row.status==1">启用</el-button>

@@ -10,6 +10,8 @@
 </template>
 <script>
 import {requestManageLogin} from '../../util/request'
+import { mapActions, mapGetters } from 'vuex';
+import { successAlert, warningAlert } from '../../util/alert';
 export default {
   components: {},
   data() {
@@ -21,10 +23,17 @@ export default {
     };
   },
   methods: {
+      ...mapActions({
+       "changeUser":'changeUser'
+      }),
       login(){
         requestManageLogin(this.user).then(res=>{
             if(res.data.code==200){
-                this.$router.push('/')
+                successAlert("登录成功")
+                this.changeUser(res.data.list)
+                this.$router.push('/home')
+            }else{
+                warningAlert(res.data.msg)
             }
         })
 
