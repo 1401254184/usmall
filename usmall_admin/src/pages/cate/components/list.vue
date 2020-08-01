@@ -11,7 +11,7 @@
     default-expand-all
     :tree-props="{children: 'children'}">
     <el-table-column
-      prop="pid"
+      prop="id"
       label="分类编号"
       width="180">
     </el-table-column>

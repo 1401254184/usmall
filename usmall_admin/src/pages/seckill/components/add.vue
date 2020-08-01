@@ -118,7 +118,7 @@ export default {
     // 一级分类发生了改变
     changeFristCateId(bool) {
       let index = this.cateList.findIndex(
-        (item) => (item.id = this.form.first_cateid)
+        (item) => (item.id == this.form.first_cateid)
       );
       this.secondCateArr = this.cateList[index].children;
       if (!bool) {
@@ -128,6 +128,8 @@ export default {
 
     // 二级分类发生了改变
     changeSecondCate(bool) {
+        this.requestGoodsList();
+       this.goodsArr=[]
       this.goodsList.forEach((item, index) => {
         if ((item.second_cateid = this.form.second_cateid)) {
           this.goodsArr.push(item);
@@ -136,6 +138,7 @@ export default {
       console.log(this.goodsArr);
       if (!bool) {
         this.form.goodsid = "";
+          
       }
     },
 
@@ -242,12 +245,12 @@ export default {
     },
     // 修改
     update() {
-        for(var i in this.form){
-          if(!this.form[i]){
-            warningAlert('数据不能为空')
-            return;
-          }
-        }
+        // for(var i in this.form){
+        //   if(!this.form[i]){
+        //     warningAlert('数据不能为空')
+        //     return;
+        //   }
+        // }
        this.form.begintime = new Date(this.getTime[0]).getTime();
       this.form.endtime = new Date(this.getTime[1]).getTime();
       requestSeckillUpdate(this.form).then((res) => {

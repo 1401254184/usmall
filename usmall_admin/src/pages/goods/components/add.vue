@@ -5,7 +5,7 @@
         <el-form-item label="一级分类" :label-width="formLabelWidth">
           <el-select v-model="form.first_cateid" @change="changeFirstCateId()">
             <el-option label="--请选择--" value disabled></el-option>
-            <el-option v-for="item in cateList" :key="item.id" :label="item.catename" :value="item.id"></el-option>
+            <el-option v-for="item in cateList" :key="item.catename" :label="item.catename" :value="item.id"></el-option>
           </el-select>
         </el-form-item>
 
@@ -148,7 +148,7 @@ export default {
 //修改了一级分类
 changeFirstCateId(bool){
 let index =this.cateList.findIndex(
-  (item)=>item.id=this.form.first_cateid
+  (item)=>item.id==this.form.first_cateid
 ) 
 this.secondCateArr=this.cateList[index].children;
 if(!bool){
@@ -206,12 +206,12 @@ changeSpecsId(bool){
 
     //添加数据
     add() {
-        for(var i in this.form){
-          if(!this.form[i]){
-            warningAlert('数据不能为空')
-            return;
-          }
-        }
+      // for(var i in this.form){
+      //     if(!this.form[i]){
+      //       warningAlert('数据不能为空')
+      //       return;
+      //     }
+      //   }
       this.form.description=this.editor.txt.html();
       this.form.specsattr=JSON.stringify(this.form.specsattr)
       requestGoodsAdd(this.form).then((res) => {
@@ -244,12 +244,7 @@ changeSpecsId(bool){
       });
     },
     update() {
-        for(var i in this.form){
-          if(!this.form[i]){
-            warningAlert('数据不能为空')
-            return;
-          }
-        }
+    
         this.form.description=this.editor.txt.html();
       this.form.specsattr=JSON.stringify(this.form.specsattr)
       requestGoodsUpdate(this.form).then((res) => {

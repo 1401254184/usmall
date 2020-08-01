@@ -109,12 +109,6 @@ export default {
     },
     //添加数据
     add() {
-        for(var i in this.form){
-          if(!this.form[i]){
-            warningAlert('数据不能为空')
-            return;
-          }
-        }
       requestCateAdd(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);
@@ -138,12 +132,12 @@ export default {
       });
     },
     update() {
-        for(var i in this.form){
-          if(!this.form[i]){
-            warningAlert('数据不能为空')
-            return;
-          }
-        }
+        // for(var i in this.form){
+        //   if(!this.form[i]){
+        //     warningAlert('数据不能为空')
+        //     return;
+        //   }
+        // }
       requestCateUpdate(this.form).then((res) => {
         if (res.data.code == 200) {
           successAlert(res.data.msg);

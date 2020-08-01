@@ -12,6 +12,10 @@ axios.interceptors.request.use(config => {
 })
 
 axios.interceptors.response.use(res=>{
+
+    console.group("本次路径：" + res.config.url)
+    console.log(res)
+    console.groupEnd()
     if(res.data.msg==="登录已过期或访问权限受限"){
         warningAlert("登录已过期或访问权限受限")
         router.push("/login");
